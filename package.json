@@ -1,0 +1,39 @@
+{
+  "name": "pchain-client-js",
+  "version": "2.0.0",
+  "description": "pchain-client-js is a library which provides abstraction to communicate with a ParallelChain Fullnode",
+  "types": "lib/index.d.ts",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "dev": "nodemon test.js",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "keywords": [
+    "parallelchain",
+    "pchain-types",
+    "xpll",
+    "pchain"
+  ],
+  "author": "ParallelChain Lab",
+  "license": "ISC",
+  "homepage": "https://github.com/parallelchain-io",
+  "dependencies": {
+    "@types/bn.js": "^5.1.1",
+    "axios": "^1.1.3",
+    "pchain-types-js": "^4.0.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
+    "nodemon": "^2.0.19",
+    "tweetnacl": "^1.0.3",
+    "ts-jest": "^28.0.5",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0"
+  }
+}
