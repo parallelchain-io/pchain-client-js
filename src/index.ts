@@ -1,7 +1,4 @@
-import { Client } from "./client"
-import { Wallet } from "./wallet"
+import { Client } from "./client";
+import { Wallet } from "./wallet";
 
-export {
-    Client,
-    Wallet,
-}
+export { Client, Wallet };
