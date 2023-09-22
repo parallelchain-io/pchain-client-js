@@ -1,6 +1,6 @@
 {
   "name": "pchain-client-js",
-  "version": "2.0.0",
+  "version": "4.1.0",
   "description": "pchain-client-js is a library which provides abstraction to communicate with a ParallelChain Fullnode",
   "types": "lib/index.d.ts",
   "main": "lib/index.js",
