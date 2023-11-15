@@ -1,4 +1,26 @@
-import axios, { ResponseType } from "axios";
+type ResponseType = "arraybuffer" | "blob" | "document" | "json" | "text" | "stream";
+
+function handleResponse(response: Response, type: ResponseType) {
+  if (type === "arraybuffer") {
+    return response.arrayBuffer().then(Buffer.from);
+  }
+  if (type === "blob") {
+    return response.blob();
+  }
+  if (type === "document") {
+    return response.text();
+  }
+  if (type === "json") {
+    return response.json();
+  }
+  if (type === "text") {
+    return response.text();
+  }
+  if (type === "stream") {
+    return response.body;
+  }
+  throw new Error(`unknown response type ${type}`);
+}
 
 export class Networking {
   provider: string;
@@ -9,17 +31,22 @@ export class Networking {
 
   /**
    * @param request_url the complete url link for post request
-   * @param data post data as rpc request
+   * @param body post data as rpc request
    * @returns rpc response data (always http status 200)
    */
-  async post_request(request_url: string, data: any) {
-    const response = await axios.post<Buffer>(`${request_url}`, data, {
-      responseType: "arraybuffer",
+  async post_request(request_url: string, body: any) {
+    const response = await fetch(request_url, {
+      method: "POST",
+      body,
+      headers: {
+        "Content-Type": "application/octet-stream",
+      },
     });
+    const data = await handleResponse(response, "arraybuffer");
     return {
       status_code: response.status,
       message: response.statusText,
-      data: response.data,
+      data,
     };
   }
 
@@ -47,11 +74,12 @@ export class Networking {
    * @returns rpc response data (always http status 200)
    */
   async get_request(request_url: string, responseType: ResponseType) {
-    const response = await axios.get(`${request_url}`, { responseType });
+    const response = await fetch(`${request_url}`);
+    const data = await handleResponse(response, responseType);
     return {
       status_code: response.status,
       message: response.statusText,
-      data: response.data,
+      data,
     };
   }
 
